@@ -11,6 +11,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.4/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.js"></script>
+    <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
 
     <!-- Custom files -->
     <link rel="stylesheet" href="css/main.css" />
@@ -21,16 +23,15 @@
 
 <body class="container">
     <h1>Welcome to Scales Exercise 3</h1>
-    <p>This exercise challenges you to bring together your D3 skills for defining scales, building charts, and positioning axes. In a reusable way. In your <code>js/main.js</code> file, you should complete the following (broad) steps.
+    <p>This exercise challenges you to bring together your D3 skills for defining scales, building charts, and positioning axes. However, the focus is on doing so in a <strong>reusable</strong> way. A static version of the page is already up and running.
+        All you have to do is make it <strong>updatable</strong>. In your <code>js/main.js</code> file, you should complete the following (broad) steps.
         <div class="instructions">
             <ul>
-                <li>Append all non-data placeholder elements for you chart (<code>svg</code>, <code>g</code>, axis labels, axes), but <strong>do not</strong> call the axis functions that render them.</li>
+                <li>Write a function to filter down your data to the current selection based on the current <code>sex</code> and <code>type</code></li>
                 <li>Write a function for setting the scales based on the current data selection.</li>
                 <li>Write a function for updating your axis elements (both the axes, and their labels).</li>
-                <li>Write a function to filter down your data to the current selection based on the current <code>sex</code> and <code>type</code></li>
-                <li>Write a reusable function to perform your data-join. Within this function you should set your scales and update your axes.</li>
+                <li>Write a reusable function to perform your data-join. Within this function you should set your scales, update your axes, and re-render your rectangles.</li>
                 <li>Assign an event handler to your <code>input</code> elements to set the <code>sex</code> and/or <code>type</code>, filter your data, then update your chart.</li>
-                <li>Call your data filter and data-join functions to render the initial data selection</li>
             </ul>
         </div>
 

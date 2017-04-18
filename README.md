@@ -14,7 +14,7 @@ Helpful links
 - [D3 Margin Convention](https://bl.ocks.org/mbostock/3019563) _(bl.ock example)_
 
 ## Conceptual Overview
-As described above, D3 scales are functions that allow you to translate between the **domain** of your data and your visual **range**. In previous modules, we often used data values directly for positioning elements in the DOM
+As described above, D3 scales are functions that allow you to translate between the **domain** of your data and your visual **range**. In previous modules, we often used data values directly for positioning elements in the DOM:
 
 ```javascript
 svg.selectAll('circle') // select all circles in the svg
@@ -71,7 +71,7 @@ var min = d3.min(data, function(d){return d.salary}); // returns minimum salary
 var max = d3.max(data, function(d){return d.salary}); // returns maximum salary
 ```
 
-For ordinal scales, it's quite helpful to be able to determine the unique set of discrete values in an array. For example, imagine you have `job_type` as an additional piece of information in the data array above. To construct an ordinal scale, you'll need to determine the unique set of jobs that appear in your dataset. The `d3.set` method allows you to easily retrieve this informaiton:
+For ordinal scales, it's quite helpful to be able to determine the unique set of discrete values in an array. For example, imagine you have `job_type` as an additional piece of information in the data array above. To construct an ordinal scale, you'll need to determine the unique set of jobs that appear in your dataset. The `d3.set` method allows you to easily retrieve this information:
 
 ```javascript
 var data = [{name:'Jim', job_type:'camp counselor', salary:10000},
@@ -139,7 +139,7 @@ ordScale.domain(data); // pass in the full array of possible values
 
 ```
 
-There are a few options for specifying the range of an ordinal scale. As you might expect, you can pass in a discrete set of values, whose indicies map to the corresponding data domain:
+There are a few options for specifying the range of an ordinal scale. As you might expect, you can pass in a discrete set of values, whose indices map to the corresponding data domain:
 
 ```javascript
 // Data array
@@ -148,14 +148,14 @@ var data = ['A', 'B', 'C'];
 // Desired output range
 var range = [100, 200, 300]
 
-// Define ordaial scale
+// Define ordinal scale
 var ordScale = d3.scaleOrdinal().domain(data).range(range);
 
 // Get pixel position for the letter 'B'
 ordScale('B'); // returns 200
 ```
 
-However, as you can imagine, this gets tedious quickly, especially as your data domain set grows (or changes). For this reason, there are a variety of additional methods you can use to set your range. The `rangePoints` and `rangeRoundPoints` methods allow you to specify the desired `interval` (i.e., minimum and maximum value), as well as how much you would like to offset your data from the edge of your scale (`padding`). These methods will *compute your range for your* by sub-dividing your interval into equal steps based on the number of values in your **data domain**. Note, these methods will **define your range** for you:
+However, as you can imagine, this gets tedious quickly, especially as your data domain set grows (or changes). For this reason, there are a variety of additional methods you can use to set your range. The `rangePoints` and `rangeRoundPoints` methods allow you to specify the desired `interval` (i.e., minimum and maximum value), as well as how much you would like to offset your data from the edge of your scale (`padding`). These methods will *compute your range for you* by sub-dividing your interval into equal steps based on the number of values in your **data domain**. Note, these methods will **define your range** for you:
 
 ```javascript
 var data = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
@@ -200,7 +200,7 @@ var data = ['A', 'B', 'C'];
 // Desired output range
 var range = ['red', 'green', 'blue']
 
-// Define ordaial scale
+// Define ordinal scale
 var colorScale = d3.scaleOrdinal().domain(data).range(range);
 
 // Get color for the letter 'C'
@@ -217,10 +217,10 @@ var colors = d3.schemeCategory10();
 colors[0] // returns the first value in the range, '#1f77b4'
 ```
 
-These preset category scales are a great resource, but don't rely too heavily on them - they _are not_ the proper visual encoding for many dataset.
+These preset category scales are a great resource, but don't rely too heavily on them - they _are not_ the proper visual encoding for many datasets.
 
 ## Axes
-**Axes** are visual representations of **scales**. While scales allow you to position an element (in pixels) based on it's data value, axes provide meaning to the pixels on the screen, allowing users to understand what each pixel means in terms of the data domain. Like anything else in your DOM, axes consist of HTML elements (`paths`, `lines`, and `text`) arranged to _look like axes_. Luckily, D3 provides us with a set of tools for defining, constructing, and manipulating axes based on changes to their corresponding scales.
+**Axes** are visual representations of **scales**. While scales allow you to position an element (in pixels) based on its data value, axes provide meaning to the pixels on the screen, allowing users to understand what each pixel means in terms of the data domain. Like anything else in your DOM, axes consist of HTML elements (`paths`, `lines`, and `text`) arranged to _look like axes_. Luckily, D3 provides us with a set of tools for defining, constructing, and manipulating axes based on changes to their corresponding scales.
 
 ### Axis Elements
 Axes are `svg` elements that contain the necessary elements for communicating the range of your data. In order to define a scale, you'll need to provide the following information:
@@ -252,7 +252,7 @@ The second challenge of working with axes is figuring out where to put them. Lik
 
 ![margin convention for d3 charts](m13-imgs/margin-convention.png)
 
-**Note**, the charting area (i.e., where all of your data symbols are rendered) is inside of an inner `g` element within you `svg`. This allows you to easily shift all of your markers without changing your scales. For example:
+**Note**, the charting area (i.e., where all of your data symbols are rendered) is inside of an inner `g` element within your `svg`. This allows you to easily shift all of your markers without changing your scales. For example:
 
 ```javascript
 // 'g' element in which to place the circles, shifted down from the top left
