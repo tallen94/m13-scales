@@ -10,7 +10,7 @@ $(function() {
         _.each(data, (d, sex) => {
             data[sex] = _.groupBy(d, 'type')
         })
-        
+
         // Margin: how much space to put in the SVG for axes/titles
         var margin = {
             left: 70,
@@ -105,16 +105,25 @@ $(function() {
             xAxisLabel.call(xAxis);
 
             // Render (call) your yAxis in your yAxisLabel
-            yAxisLabel.call(yAxis);
+            yAxisLabel
+                .transition()
+                .duration(500)
+                .call(yAxis);
 
             // Update xAxisText and yAxisText labels
             xAxisText.text('State');
             yAxisText.text('Percent Drinking (' + sex + ', ' + type + ')');
         }
 
-        function draw() {
+        function initial(bars, first) {
+            return first ? bars
+                .attr('y', drawHeight)
+                .attr('height', 0) : bars
+        }
+
+        function draw(first) {
             var bars = g.selectAll('rect').data(data[sex][type]);
-            bars.enter().append('rect')
+            bars = bars.enter().append('rect')
                 .attr('x', function(d) {
                     return xScale(d.state);
                 })
@@ -123,8 +132,13 @@ $(function() {
                 .on('mouseout', tip.hide)
                 .attr('width', xScale.bandwidth())
                 .merge(bars)
+                
+            initial(bars, first)
                 .transition()
                 .duration(500)
+                .delay((d, i) => {
+                    return i * 50;
+                })
                 .attr('y', function(d) {
                     return yScale(d.percent);
                 })
@@ -140,7 +154,7 @@ $(function() {
         g.call(tip);
 
         setAxes();
-        draw();
+        draw(true);
 
         $('input').on('change', function() {
             var val = $(this).val()
@@ -151,7 +165,7 @@ $(function() {
                 type = val
             }
             setAxes();
-            draw();
+            draw(false);
         })        
     });
 });
